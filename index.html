@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#09071c" />
+<meta name="description" content="EILAN UNIVERSE — من بين كل النجوم، إنتِ عالمي" />
+<title>EILAN UNIVERSE — مجرّة إيلان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<script src="content.js" defer></script>
+<script src="script.js" defer></script>
+</head>
+<body>
+<canvas id="starCanvas" aria-hidden="true"></canvas>
+<div class="cosmic-fog" aria-hidden="true"></div>
+<div id="wishStars" class="wish-stars" aria-label="نجوم تحمل رسائل مخفية"></div>
+<audio id="music" src="music.mp3" preload="auto" loop></audio>
+
+<header id="topBar" class="topbar is-hidden">
+  <div class="brand"><span class="brand-star">✦</span> EILAN <span>UNIVERSE</span></div>
+  <div class="topbar-right"><span id="stageCount" class="pill tiny">01 / 07</span><button type="button" id="helpButton" class="icon-button" aria-label="طريقة الاستخدام" title="طريقة الاستخدام">؟</button></div>
+</header>
+<div id="stageProgress" class="stage-progress is-hidden" aria-hidden="true"><span></span></div>
+
+<main id="app">
+  <section id="gate" class="gate screen" aria-label="بوابة المجرّة">
+    <div class="gate-orbit orbit-one"></div><div class="gate-orbit orbit-two"></div>
+    <div class="gate-inner">
+      <div class="gate-emblem" aria-hidden="true"><span>✧</span></div>
+      <p class="overline">A WORLD MADE ONLY FOR YOU</p>
+      <h1 class="galaxy-title">EILAN <span>UNIVERSE</span></h1>
+      <p class="gate-sub">من بين كل النجوم، إنتِ عالمي</p>
+      <div class="glass-card gate-card">
+        <span class="section-kicker">المفتاح الأول · لغز القلب</span>
+        <h2 id="riddleQuestion">منو البنية اللي صارت مجرّتي كلها؟</h2>
+        <form id="riddleForm" novalidate>
+          <label class="sr-only" for="riddleAnswer">جواب اللغز</label>
+          <input id="riddleAnswer" type="text" autocomplete="off" spellcheck="false" placeholder="اكتبي الجواب من قلبج..." required />
+          <button class="primary-btn" type="submit">افتحي مجرّتج <span aria-hidden="true">✧</span></button>
+        </form>
+        <p id="gateFeedback" class="feedback" aria-live="polite">هاي الرحلة مخصوصة لأج يا نجمة روحي ♡</p>
+      </div>
+      <p class="micro-note">صُنعت بحب، حتى تبقين أقرب نجمة لقلبي</p>
+    </div>
+  </section>
+
+  <section id="resumeScreen" class="resume screen is-hidden" aria-labelledby="resumeTitle">
+    <div class="glass-card resume-card">
+      <div class="giant-glyph">✦</div>
+      <p class="overline">WELCOME BACK, MY UNIVERSE</p>
+      <h2 id="resumeTitle">المجرّة بعدها تنتظرج</h2>
+      <p>كل نجمة هنا حافظت مكانج، تحبين نكمل الحكاية لو نعيشها من أولها؟</p>
+      <button id="resumeButton" class="primary-btn" type="button">كمّلي رحلتج ♡</button>
+      <button id="freshButton" class="secondary-btn" type="button">ابدئي من البداية</button>
+    </div>
+  </section>
+
+  <section id="opening" class="opening screen is-hidden" aria-labelledby="openingTitle">
+    <div class="burst-field" id="burstField" aria-hidden="true"></div>
+    <div class="opening-content">
+      <span class="opening-icon">✷</span>
+      <p class="overline">THE BEGINNING OF OUR FOREVER</p>
+      <h2 id="openingTitle">من بين كل النجوم<br><em>إنتِ عالمي</em></h2>
+      <p>سبع كواكب، آلاف المشاعر، وبنية وحدة أخذت كل گَلبي</p>
+      <button id="launchButton" class="primary-btn" type="button">ابدئي رحلتج بين نجومي <span aria-hidden="true">✦</span></button>
+    </div>
+  </section>
+
+  <section id="journey" class="journey is-hidden" aria-labelledby="planetTitle">
+    <div id="transitionScreen" class="transition-screen is-hidden" aria-hidden="true"><div class="warp-orbit"></div><div class="warp-icon">✦</div><p id="transitionText">نسافر للنجمة اللي بعدها...</p></div>
+    <div class="journey-inner">
+      <div class="timeline" id="timeline" aria-label="مراحل الرحلة"></div>
+      <section class="planet-intro" aria-live="polite">
+        <div id="planetArt" class="planet-art" aria-hidden="true"><div class="planet-sphere"></div><div class="planet-ring"></div></div>
+        <div class="planet-heading"><p id="planetEyebrow" class="overline">PLANET 01 / 07</p><h2 id="planetTitle">أجمل نجمة</h2><p id="planetDescription">كل ضحكة منج تسوي مجرّة بگلبي</p></div>
+      </section>
+      <div class="story-panel">
+        <div class="story-panel-top"><span id="chapterLabel" class="section-kicker">الفصل الأول</span><div class="story-counter"><span id="photoIndex">01</span> <span class="slash">/</span> <span id="photoTotal">53</span></div></div>
+        <div id="storyContent" class="story-content"></div>
+        <div id="captionArea" class="caption-area"><span class="caption-label">رسالة صغيرة من گَلبي ♡</span><p id="typedCaption" class="typed-caption" aria-live="polite"></p></div>
+        <div id="storyActions" class="story-actions"><button type="button" id="previousPhoto" class="round-action" aria-label="الصورة السابقة">→</button><span id="storyHint" class="story-hint">اسحبي بإصبعج حتى تنتقلين بين الذكريات</span><button type="button" id="nextPhoto" class="round-action" aria-label="الصورة التالية">←</button></div>
+        <div class="extras-row"><button id="heartButton" type="button" class="heart-button" aria-pressed="false" title="حبي هاي الذكرى"><span id="heartSymbol">♡</span> <span id="heartText">حبي هاي الذكرى</span></button><button type="button" id="autoplayButton" class="small-ghost-btn" aria-pressed="false">▷ عرض تلقائي</button></div>
+      </div>
+      <div class="planet-navigation"><button type="button" id="backPlanet" class="secondary-btn">→ الكوكب السابق</button><button type="button" id="nextPlanet" class="primary-btn" disabled>الكوكب التالي ←</button></div>
+      <p id="planetCompletion" class="planet-completion" aria-live="polite">عيشي كل ذكرى حتى ينفتح الكوكب اللي بعده ✨</p>
+    </div>
+  </section>
+
+  <section id="finale" class="finale screen is-hidden" aria-labelledby="finaleTitle">
+    <div class="finale-wrap">
+      <p class="overline">LAST PLANET · OUR FOREVER</p>
+      <span class="finale-glyph">✦</span>
+      <h2 id="finaleTitle">مستقبلنا <span>يشبه الحلم</span></h2>
+      <p id="futureLead" class="finale-lead"></p>
+      <div id="futureImages" class="future-gallery"></div>
+      <div class="glass-card future-letter"><span class="section-kicker">رسالة من باچر ♡</span><p id="futureStory"></p></div>
+      <div class="promise-box"><span class="promise-glyph">✉</span><h3>صندوق الوعد</h3><p>أكو وعد مو مخبّيه عنج، بس محتفظ بيه بهالصندوق حتى تقريه من گَلبي</p><button id="promiseButton" type="button" class="primary-btn">افتحي وعدي إلج ✨</button><div id="promiseLetter" class="promise-letter is-hidden"></div></div>
+      <div id="starlitNames" class="starlit-names is-hidden" aria-live="polite"><p>وكت ما تلمعين، المجرة تذكر اسمي ويا اسمج</p><h3>إيلان وحبيبها</h3><div class="names-line">✦ ✧ ✦ ✧ ✦</div></div>
+      <div id="lastLetter" class="last-letter glass-card is-hidden"><span class="section-kicker">آخر رسالة... بس مو آخر حب</span><h3>إلى إيلاني، كل عالمي</h3><p id="lastLetterBody"></p></div>
+      <div id="endActions" class="end-actions is-hidden"><button type="button" id="showFavorites" class="secondary-btn">♡ ذكرياتي المفضلة</button><button type="button" id="replayButton" class="primary-btn">عيشي رحلتنا من جديد ✨</button></div>
+      <div id="favoritesPanel" class="favorites-panel is-hidden"><div class="favorites-title"><h3>الذكريات اللي حبيتيها ♡</h3><button id="closeFavorites" type="button" class="icon-button" aria-label="إغلاق المفضلة">✕</button></div><div id="favoritesGrid" class="favorites-grid"></div></div>
+      <p class="footer-note">صنعت هالمجرّة لأن الكون كله ما يكفي أوصف بيه حبي إلج ♡</p>
+    </div>
+  </section>
+</main>
+
+<div id="mediaModal" class="media-modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="modalLabel">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-shell"><div class="modal-top"><span id="modalLabel">ذكرى من مجرّتنا</span><button id="closeModal" type="button" class="icon-button" aria-label="إغلاق">✕</button></div><div class="modal-media-wrap" id="modalMediaWrap"></div><p id="modalCaption" class="modal-caption"></p><p class="modal-instruction">للصور: كبّري بإصبعين أو حرّكي الصورة · اضغطي مرتين لإعادة الحجم</p></div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
